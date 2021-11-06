@@ -1,0 +1,13 @@
+{
+	"FileVersion": 3,
+	"EngineAssociation": "{8E780F5D-4EF0-73C5-BA1E-8AB58E2A7E60}",
+	"Category": "",
+	"Description": "",
+	"Modules": [
+		{
+			"Name": "UE4CPP",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
+		}
+	]
+}
