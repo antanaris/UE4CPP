@@ -50,6 +50,7 @@ struct FInventory
 
 	FInventory(const FString Name, const FIntVector& Size, const TArray<FInventoryItem>& NewItems) : Name(Name), Size(Size), Items(NewItems)
 	{
+		// ToDo: Take into account item size
 		if (Items.Num() > Size.X * Size.Y * Size.Z)
 		{
 			Items.SetNum(Size.X * Size.Y * Size.Z);
