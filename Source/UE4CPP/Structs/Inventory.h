@@ -25,7 +25,7 @@ struct FInventory
 	int32 SlotsOccupied = 0;
 
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Inventory")
-	int32 SlotsFree = 0;
+	int32 SlotsFree = Size.X * Size.Y * Size.Z;;
 
 	// Slot types (from InventoryItemType)
 	// Add ability to assign types to slots

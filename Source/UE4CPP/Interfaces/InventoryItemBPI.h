@@ -21,7 +21,7 @@ public:
 	// Getter. Returns value to InventoryItem variable
 	UFUNCTION(BlueprintCallable, BlueprintNativeEvent, Category = "Inventory Item")
 	void GetInventoryItem(FInventoryItem& InventoryItem);
-	virtual void GetInventoryItem_Implementation(FInventoryItem& InventoryItem);
+	void GetInventoryItem_Implementation(FInventoryItem& InventoryItem);
 	
 
 	// Setter. Using UPARAM(ref) to pass value or mark it as const

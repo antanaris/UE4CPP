@@ -36,6 +36,8 @@ void UInventoryActorComponentC::TickComponent(float DeltaTime, ELevelTick TickTy
 void UInventoryActorComponentC::SetSize(const FIntVector& NewSize)
 {
 	Inventory.Size = NewSize;
+	Inventory.SlotsOccupied = Inventory.Items.Num();
+	Inventory.SlotsFree = Inventory.Size.X * Inventory.Size.Y * Inventory.Size.Z - Inventory.SlotsOccupied;
 }
 
 void UInventoryActorComponentC::AddItem(const FInventoryItem& Item, bool& Result)
