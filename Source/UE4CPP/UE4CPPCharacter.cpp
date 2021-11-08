@@ -76,7 +76,6 @@ void AUE4CPPCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AUE4CPPCharacter::OnResetVR);
 }
 
-
 void AUE4CPPCharacter::OnResetVR()
 {
 	// If UE4CPP is added to a project via 'Add Feature' in the Unreal Editor the dependency on HeadMountedDisplay in UE4CPP.Build.cs is not automatically propagated
