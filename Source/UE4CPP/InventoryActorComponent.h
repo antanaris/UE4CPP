@@ -6,17 +6,17 @@
 #include "Components/ActorComponent.h"
 #include "Structs/InventoryItem.h"
 #include "Structs/Inventory.h"
-#include "InventoryActorComponentC.generated.h"
+#include "InventoryActorComponent.generated.h"
 
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
-class UE4CPP_API UInventoryActorComponentC : public UActorComponent
+class UE4CPP_API UInventoryActorComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
 public:
 	// Sets default values for this component's properties
-	UInventoryActorComponentC();
+	UInventoryActorComponent();
 
 	// Inventory
 	UPROPERTY(BlueprintReadOnly, VisibleAnywhere, Category = "Inventory")

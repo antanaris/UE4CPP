@@ -8,14 +8,14 @@
 AUE4CPPGameMode::AUE4CPPGameMode()
 {
 	// set default pawn class to our Blueprinted character
-	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/ThirdPersonCharacter"));
+	static ConstructorHelpers::FClassFinder<APawn> PlayerPawnBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/BP_ThirdPersonCharacter"));
 	if (PlayerPawnBPClass.Class != NULL)
 	{
 		DefaultPawnClass = PlayerPawnBPClass.Class;
 	};
 
 	//Setting our default player state to be a MainPlayerState
-	static ConstructorHelpers::FClassFinder<AMainPlayerState> PlayerStateBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/InventoryPlayerState"));
+	static ConstructorHelpers::FClassFinder<AMainPlayerState> PlayerStateBPClass(TEXT("/Game/ThirdPersonCPP/Blueprints/BP_InventoryPlayerState"));
 	if (PlayerStateBPClass.Class != NULL)
 	{
 		PlayerStateClass = PlayerStateBPClass.Class;

@@ -1,11 +1,11 @@
 ﻿// Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "InventoryActorComponentC.h"
+#include "InventoryActorComponent.h"
 
 
 // Sets default values for this component's properties
-UInventoryActorComponentC::UInventoryActorComponentC()
+UInventoryActorComponent::UInventoryActorComponent()
 {
 	// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
 	// off to improve performance if you don't need them.
@@ -16,7 +16,7 @@ UInventoryActorComponentC::UInventoryActorComponentC()
 
 
 // Called when the game starts
-void UInventoryActorComponentC::BeginPlay()
+void UInventoryActorComponent::BeginPlay()
 {
 	Super::BeginPlay();
 
@@ -26,21 +26,21 @@ void UInventoryActorComponentC::BeginPlay()
 
 
 // Called every frame
-void UInventoryActorComponentC::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+void UInventoryActorComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
 {
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
 }
 
-void UInventoryActorComponentC::SetSize(const FIntVector& NewSize)
+void UInventoryActorComponent::SetSize(const FIntVector& NewSize)
 {
 	Inventory.Size = NewSize;
 	Inventory.SlotsOccupied = Inventory.Items.Num();
 	Inventory.SlotsFree = Inventory.Size.X * Inventory.Size.Y * Inventory.Size.Z - Inventory.SlotsOccupied;
 }
 
-void UInventoryActorComponentC::AddItem(const FInventoryItem& Item, bool& Result)
+void UInventoryActorComponent::AddItem(const FInventoryItem& Item, bool& Result)
 {
 	if (Inventory.SlotsFree > 0)
     {
@@ -56,14 +56,14 @@ void UInventoryActorComponentC::AddItem(const FInventoryItem& Item, bool& Result
 	
 }
 
-void UInventoryActorComponentC::RemoveItem(const FInventoryItem& Item)
+void UInventoryActorComponent::RemoveItem(const FInventoryItem& Item)
 {
 	Inventory.Items.Remove(Item);
 	Inventory.SlotsOccupied--;
 	Inventory.SlotsFree++;
 }
 
-void UInventoryActorComponentC::SetDefaultInventory(const FInventory& DefaultInventory)
+void UInventoryActorComponent::SetDefaultInventory(const FInventory& DefaultInventory)
 {
 	Inventory = DefaultInventory;
 }
