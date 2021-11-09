@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "Interfaces/InventoryItemBPI.h"
 #include "GameFramework/Character.h"
+#include "InventoryActorComponent.h"
 #include "UE4CPPCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -19,6 +20,11 @@ class AUE4CPPCharacter : public ACharacter
 	/** Follow camera */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
 	class UCameraComponent* FollowCamera;
+
+	/** Inventory */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
+	class UInventoryActorComponent* Inventory;
+	
 public:
 	AUE4CPPCharacter();
 
