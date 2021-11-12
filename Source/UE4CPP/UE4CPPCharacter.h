@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Inventory/Interfaces/InventoryItemBPI.h"
+#include "Inventory/Interfaces/InventoryItemInfo.h"
 #include "GameFramework/Character.h"
 #include "Inventory/InventoryActorComponent.h"
 #include "UE4CPPCharacter.generated.h"
