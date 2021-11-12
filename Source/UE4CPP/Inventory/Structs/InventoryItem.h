@@ -1,6 +1,6 @@
 ﻿#pragma once
 
-#include "UE4CPP/Enums/InventoryItemType.h"
+#include "../Enums/InventoryItemType.h"
 #include "InventoryItem.generated.h"
 
 USTRUCT(BlueprintType)
@@ -12,7 +12,7 @@ struct FInventoryItem
 	int32 ID = 0;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Item")
-	TEnumAsByte<InventoryItemType> Type = InventoryItemType::Default;
+	TEnumAsByte<EInventoryItemType> Type = EInventoryItemType::Default;
 
 	UPROPERTY(BlueprintReadWrite, EditAnywhere, Category = "Inventory Item")
 	FIntVector Size = FIntVector(1, 1, 1);
@@ -26,7 +26,7 @@ struct FInventoryItem
 	// Constructors
 	FInventoryItem() {};
 
-FORCEINLINE	FInventoryItem(const int32 ID, const TEnumAsByte<InventoryItemType>& Type, const FIntVector& Size, const FString& Name,
+FORCEINLINE	FInventoryItem(const int32 ID, const TEnumAsByte<EInventoryItemType>& Type, const FIntVector& Size, const FString& Name,
 		const FString& Description)
 		: ID(ID),
 		  Type(Type),

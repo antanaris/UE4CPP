@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Interfaces/InventoryItemBPI.h"
+#include "Inventory/Interfaces/InventoryItemBPI.h"
 #include "GameFramework/Character.h"
-#include "InventoryActorComponent.h"
+#include "Inventory/InventoryActorComponent.h"
 #include "UE4CPPCharacter.generated.h"
 
 UCLASS(config=Game)

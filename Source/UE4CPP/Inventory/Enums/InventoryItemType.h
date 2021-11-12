@@ -1,7 +1,7 @@
 ﻿#pragma once
 
 UENUM(BlueprintType)
-enum InventoryItemType
+enum EInventoryItemType
 {
 	Default	UMETA(DisplayName = "Default"),
 	Sphere    UMETA(DisplayName = "Sphere"),

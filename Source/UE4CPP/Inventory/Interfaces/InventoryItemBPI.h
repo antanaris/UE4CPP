@@ -2,7 +2,7 @@
 
 #include "Blueprint/BlueprintSupport.h"
 #include "Runtime/CoreUObject/Public/UObject/NoExportTypes.h"
-#include "UE4CPP/Structs/InventoryItem.h"
+#include "../Structs/InventoryItem.h"
 #include "InventoryItemBPI.generated.h"
 
 UINTERFACE(Blueprintable)
