@@ -23,7 +23,7 @@ class UE4CPP_API IReloadable
 public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon")
-	void CanReload(bool& bCanReload);
+	bool CanReload();
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable, Category = "Weapon")
 	void Reload();

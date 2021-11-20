@@ -7,6 +7,8 @@
 #include "../Interfaces/Reloadable.h"
 #include "GeneralWeapon.generated.h"
 
+
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnWeaponHit, FHitResult, HitResult);
 /**
  * 
  */
@@ -64,20 +66,26 @@ public:
 	bool CanFire() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
-	bool CanReload() const;
-
-	UFUNCTION(BlueprintCallable, Category = "Weapon")
-	void Reload();
-
-	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	void UseAmmo();
 
 	UFUNCTION()
-	void WeaponTrace();
+	FHitResult WeaponTrace();
 	void WeaponTrace(FVector& HitLocation); // 🌸
 
 	// Reloadable interface	
-	virtual void CanReload_Implementation(bool& bCanReload) override;
+	virtual bool CanReload_Implementation() override;
 	virtual void Reload_Implementation() override;
+
+	// Delegates
+	UPROPERTY(BlueprintAssignable, Category = "Weapon")
+	FOnWeaponHit OnWeaponHit;
+
+private:
+
+	UFUNCTION()
+	bool _CanReload() const;
+
+	UFUNCTION()
+	void _Reload();
 
 };
