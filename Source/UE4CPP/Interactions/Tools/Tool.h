@@ -12,7 +12,7 @@ class ATool;
 DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnToolBeginOverlap);
 
 
-UCLASS()
+UCLASS(Blueprintable)
 class UE4CPP_API ATool : public AActor
 {
 	GENERATED_BODY()

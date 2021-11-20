@@ -26,7 +26,7 @@ class AUE4CPPCharacter : public ACharacter
 	class UInventoryActorComponent* Inventory;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
-	class UChildActorComponent* WeaponChildActorComponent;
+	class UChildActorComponent* ToolChildActorComponent;
 	
 public:
 	AUE4CPPCharacter();
