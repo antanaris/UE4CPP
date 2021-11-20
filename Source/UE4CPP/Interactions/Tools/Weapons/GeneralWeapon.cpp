@@ -5,12 +5,6 @@
 #include "DrawDebugHelpers.h"
 #include "Engine/StaticMeshSocket.h"
 
-
-AGeneralWeapon::AGeneralWeapon()
-{
-	
-}
-
 void AGeneralWeapon::BeginPlay()
 {
 	Super::BeginPlay();
@@ -39,48 +33,84 @@ void AGeneralWeapon::BeginPlay()
 
 void AGeneralWeapon::Fire()
 {
-	FHitResult HitResult;
-	FVector StartLocation;
-	FVector EndLocation;
+	if(CanFire())
+		{
+			UseAmmo();
+		
+			FHitResult HitResult;
+			FVector StartLocation;
+			FVector EndLocation;
 
-	if(bHasMuzzleSocket)
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Firing from the muzzle on the weapon mesh"));
-		StartLocation = Mesh->GetSocketLocation(MuzzleSocketName);
-		EndLocation = StartLocation + (Mesh->GetSocketRotation(MuzzleSocketName).Vector() * Range);	
-	}
-	else
-	{
-		GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Firing from the virtual weapon"));
-		StartLocation = GetActorLocation();
-		EndLocation = StartLocation + (GetActorRotation().Vector() * Range);
-	}
+			if(bHasMuzzleSocket)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Firing from the muzzle on the weapon mesh"));
+				StartLocation = Mesh->GetSocketLocation(MuzzleSocketName);
+				EndLocation = StartLocation + (Mesh->GetSocketRotation(MuzzleSocketName).Vector() * Range);	
+			}
+			else
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 5.f, FColor::Red, TEXT("Firing from the virtual weapon"));
+				StartLocation = GetActorLocation();
+				EndLocation = StartLocation + (GetActorRotation().Vector() * Range);
+			}
 
-	GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility);
+			GetWorld()->LineTraceSingleByChannel(HitResult, StartLocation, EndLocation, ECollisionChannel::ECC_Visibility);
 
-	if(bIsDebug)
-	{
-		DrawDebugSphere(GetWorld(), StartLocation, 3, 10, FColor::Blue, false, 25.0f);
-		DrawDebugSphere(GetWorld(), EndLocation, 3, 10, FColor::Green, false, 25.0f);
-		DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Orange, false, 25.0f);
-		DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 6, 10, FColor::Red, true, 25.0f);
-	}
+			if(bIsDebug)
+			{
+				DrawDebugSphere(GetWorld(), StartLocation, 3, 10, FColor::Blue, false, 5.0f);
+				DrawDebugSphere(GetWorld(), EndLocation, 3, 10, FColor::Green, false, 5.0f);
+				DrawDebugLine(GetWorld(), StartLocation, EndLocation, FColor::Orange, false, 5.0f);
+				DrawDebugSphere(GetWorld(), HitResult.ImpactPoint, 6, 10, FColor::Red, true, 5.0f);
+			}
+		}
 }
 
-void AGeneralWeapon::CanFire(bool& bCanFire) const
+bool AGeneralWeapon::CanFire() const
 {
+	// Can fire if there is ammo in clip
+	return(CurrentAmmoInClip > 0 && bIsReloading == false);
 }
 
-void AGeneralWeapon::CanReload(bool& bCanReload) const
+bool AGeneralWeapon::CanReload() const
 {
+	// Reloading is only possible if there is ammo left, clip has free slots and weapon is not reloading
+	return((CurrentAmmo > 0) && (CurrentAmmoInClip < AmmoPerClip) && !bIsReloading);
 }
 
 void AGeneralWeapon::Reload()
 {
+	if(CurrentAmmo >= AmmoPerClip)
+	{
+		// fill the clip
+		CurrentAmmoInClip = AmmoPerClip;
+	}
+	else
+	{
+		// fill the clip with remaining ammo
+		CurrentAmmoInClip = CurrentAmmo;
+	}
+}
+
+void AGeneralWeapon::CanReload_Implementation(bool& bCanReload)
+{
+	IReloadable::CanReload_Implementation(bCanReload);
+
+	bCanReload = CanReload();
+}
+
+void AGeneralWeapon::Reload_Implementation()
+{
+	IReloadable::Reload_Implementation();
+
+    Reload();
+
 }
 
 void AGeneralWeapon::UseAmmo()
 {
+	CurrentAmmoInClip--;
+	CurrentAmmo--;
 }
 
 void AGeneralWeapon::WeaponTrace()

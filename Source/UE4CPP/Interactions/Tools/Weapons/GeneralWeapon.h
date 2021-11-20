@@ -4,19 +4,16 @@
 
 #include "CoreMinimal.h"
 #include "../Tool.h"
+#include "../Interfaces/Reloadable.h"
 #include "GeneralWeapon.generated.h"
 
 /**
  * 
  */
 UCLASS(Blueprintable)
-class UE4CPP_API AGeneralWeapon : public ATool
+class UE4CPP_API AGeneralWeapon : public ATool, public IReloadable
 {
 	GENERATED_BODY()
-
-public:
-	// Sets default values for this actor's properties
-	AGeneralWeapon();
 
 protected:
 	// Called when the game starts or when spawned
@@ -64,19 +61,23 @@ public:
 	void Fire();
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
-	void CanFire(bool& bCanFire) const;
+	bool CanFire() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
-	void CanReload(bool& bCanReload) const;
+	bool CanReload() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	void Reload();
 
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable, Category = "Weapon")
 	void UseAmmo();
 
 	UFUNCTION()
 	void WeaponTrace();
 	void WeaponTrace(FVector& HitLocation); // 🌸
+
+	// Reloadable interface	
+	virtual void CanReload_Implementation(bool& bCanReload) override;
+	virtual void Reload_Implementation() override;
 
 };

@@ -50,6 +50,7 @@ AUE4CPPCharacter::AUE4CPPCharacter()
 	// Create Child Actor Component
 	ToolChildActorComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("Tool"));
 	ToolChildActorComponent->SetupAttachment(RootComponent);
+
 	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
@@ -89,10 +90,12 @@ void AUE4CPPCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	// Create weapon and attach it to left hand
-	/*ToolChildActorComponent->SetChildActorClass(ATool::StaticClass());
+	// Tool class is defined in BP
+	/*ToolChildActorComponent->SetChildActorClass(ATool::StaticClass());*/
+
+	// Attach tool to left hand
 	ToolChildActorComponent->CreateChildActor();
-	ToolChildActorComponent->GetChildActor()->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("hand_lSocket"));*/
+	ToolChildActorComponent->GetChildActor()->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("hand_lSocket"));
 
 }
 
