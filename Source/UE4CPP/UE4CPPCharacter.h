@@ -24,6 +24,9 @@ class AUE4CPPCharacter : public ACharacter
 	/** Inventory */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 	class UInventoryActorComponent* Inventory;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
+	class UChildActorComponent* WeaponChildActorComponent;
 	
 public:
 	AUE4CPPCharacter();
@@ -37,6 +40,9 @@ public:
 	float BaseLookUpRate;
 
 protected:
+
+	/** BeginPlay */
+	virtual void BeginPlay() override;
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();

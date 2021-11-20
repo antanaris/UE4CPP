@@ -8,6 +8,7 @@
 #include "Structs/Inventory.h"
 #include "InventoryActorComponent.generated.h"
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE(FOnInventoryUpdated);
 
 UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class UE4CPP_API UInventoryActorComponent : public UActorComponent
@@ -47,4 +48,8 @@ public:
 	// Set default inventory
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SetDefaultInventory(const FInventory& DefaultInventory);
+
+	// Custom event
+	UPROPERTY(BlueprintAssignable, Category = "Inventory")
+	FOnInventoryUpdated OnInventoryUpdated;
 };
