@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Interactions/Tools/Tool.h"
 
 //////////////////////////////////////////////////////////////////////////
 // AUE4CPPCharacter
@@ -46,6 +47,11 @@ AUE4CPPCharacter::AUE4CPPCharacter()
 	// Create inventory
 	Inventory = CreateDefaultSubobject<UInventoryActorComponent>(TEXT("Inventory"));
 
+	// Create Child Actor Component
+	ToolChildActorComponent = CreateDefaultSubobject<UChildActorComponent>(TEXT("Tool"));
+	ToolChildActorComponent->SetupAttachment(RootComponent);
+
+	
 	// Note: The skeletal mesh and anim blueprint references on the Mesh component (inherited from Character) 
 	// are set in the derived blueprint asset named MyCharacter (to avoid direct content references in C++)
 }
@@ -78,6 +84,19 @@ void AUE4CPPCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerIn
 
 	// VR headset functionality
 	PlayerInputComponent->BindAction("ResetVR", IE_Pressed, this, &AUE4CPPCharacter::OnResetVR);
+}
+
+void AUE4CPPCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	// Tool class is defined in BP
+	/*ToolChildActorComponent->SetChildActorClass(ATool::StaticClass());*/
+
+	// Attach tool to left hand
+	ToolChildActorComponent->CreateChildActor();
+	ToolChildActorComponent->GetChildActor()->AttachToComponent(GetMesh(), FAttachmentTransformRules::SnapToTargetNotIncludingScale, FName("hand_lSocket"));
+
 }
 
 void AUE4CPPCharacter::OnResetVR()

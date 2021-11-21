@@ -3,9 +3,9 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Interfaces/InventoryItemBPI.h"
+#include "Inventory/Interfaces/InventoryItemInfo.h"
 #include "GameFramework/Character.h"
-#include "InventoryActorComponent.h"
+#include "Inventory/InventoryActorComponent.h"
 #include "UE4CPPCharacter.generated.h"
 
 UCLASS(config=Game)
@@ -24,6 +24,9 @@ class AUE4CPPCharacter : public ACharacter
 	/** Inventory */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Inventory, meta = (AllowPrivateAccess = "true"))
 	class UInventoryActorComponent* Inventory;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Weapon, meta = (AllowPrivateAccess = "true"))
+	class UChildActorComponent* ToolChildActorComponent;
 	
 public:
 	AUE4CPPCharacter();
@@ -37,6 +40,9 @@ public:
 	float BaseLookUpRate;
 
 protected:
+
+	/** BeginPlay */
+	virtual void BeginPlay() override;
 
 	/** Resets HMD orientation in VR. */
 	void OnResetVR();

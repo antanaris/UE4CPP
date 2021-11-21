@@ -4,7 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/PlayerState.h"
-#include "Structs/Inventory.h"
+#include "Inventory/Structs/Inventory.h"
 #include "MainPlayerState.generated.h"
 
 /**
